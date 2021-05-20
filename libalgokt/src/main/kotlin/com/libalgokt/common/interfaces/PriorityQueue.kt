@@ -1,6 +1,6 @@
 package com.libalgokt.common.interfaces
 
-public interface PriorityQueue<E : Comparable<E>> {
+interface PriorityQueue<E : Comparable<E>> {
     fun insert(item: E)
     fun delete(): E?
     fun peek(): E?

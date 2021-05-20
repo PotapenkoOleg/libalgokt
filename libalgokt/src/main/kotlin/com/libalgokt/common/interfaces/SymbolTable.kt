@@ -1,6 +1,6 @@
 package com.libalgokt.common.interfaces
 
-public interface SymbolTable<E> {
+interface SymbolTable<E> {
     fun add(key: String, value: E)
     fun remove(key: String): E?
     fun get(key: String): E?

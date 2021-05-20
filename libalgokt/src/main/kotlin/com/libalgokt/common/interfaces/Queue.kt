@@ -1,6 +1,6 @@
 package com.libalgokt.common.interfaces
 
-public interface Queue<E> : Iterable<E> {
+interface Queue<E> : Iterable<E> {
     fun enqueue(item: E)
     fun dequeue(): E?
     fun peek(): E?
