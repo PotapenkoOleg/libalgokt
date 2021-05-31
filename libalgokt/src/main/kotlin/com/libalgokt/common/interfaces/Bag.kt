@@ -1,7 +1,6 @@
 package com.libalgokt.common.interfaces
 
-interface Bag<E> : Iterable<E> {
+
+interface Bag<E> : Iterable<E>, CollectionBase {
     fun add(item: E)
-    fun isEmpty(): Boolean
-    fun getSize(): Int
 }
