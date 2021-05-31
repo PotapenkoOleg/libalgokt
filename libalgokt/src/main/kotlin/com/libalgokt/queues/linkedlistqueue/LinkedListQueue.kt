@@ -3,13 +3,12 @@ package com.libalgokt.queues.linkedlistqueue
 
 import com.libalgokt.common.interfaces.Bag
 import com.libalgokt.common.interfaces.Queue
-import com.libalgokt.stacks.ArrayStack
 
 class LinkedListQueue<E> : Queue<E>, Bag<E> {
-    private var first: LinkedListQueueNode<E>? = null
     private var size = 0
+    private var first: LinkedListQueueNode<E>? = null
 
-    private class LinkedListQueueNode<Item>(val item: Item) {
+    private class LinkedListQueueNode<Item>(val item: Item?) {
         var next: LinkedListQueueNode<Item>? = null
     }
 
@@ -26,7 +25,7 @@ class LinkedListQueue<E> : Queue<E>, Bag<E> {
             return null
         }
         if (first!!.next == null) {
-            result = first!!.item
+            result = first!!.item!!
             first = null
             --size
             return result
@@ -37,7 +36,7 @@ class LinkedListQueue<E> : Queue<E>, Bag<E> {
             previous = current
             current = current.next
         }
-        result = current.item
+        result = current.item!!
         previous!!.next = null
         --size
         return result
@@ -79,24 +78,22 @@ class LinkedListQueue<E> : Queue<E>, Bag<E> {
 
     override fun iterator(): Iterator<E> {
         return object : Iterator<E> {
-            private val stack = ArrayStack<E>() // TODO: Linked List Stack
+            private var current: LinkedListQueueNode<E>? = null
             override fun hasNext(): Boolean {
-                return !stack.isEmpty()
+                return current != null && current!!.next != null
             }
 
             override fun next(): E {
                 if (hasNext()) {
-                    return stack.pop()!!
+                    current = current!!.next
+                    return current!!.item!!
                 }
                 throw NoSuchElementException()
             }
 
             init {
-                var current = first
-                while (current != null) {
-                    stack.push(current.item)
-                    current = current.next
-                }
+                current = LinkedListQueueNode(null)
+                current!!.next = first
             }
         }
     }

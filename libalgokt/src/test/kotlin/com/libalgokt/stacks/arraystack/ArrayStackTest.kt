@@ -1,4 +1,4 @@
-package com.libalgokt.stacks
+package com.libalgokt.stacks.arraystack
 
 import com.libalgokt.common.interfaces.Stack
 import org.junit.jupiter.api.AfterEach
